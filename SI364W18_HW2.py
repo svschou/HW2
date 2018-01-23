@@ -2,7 +2,7 @@
 ## Winter 2018
 ## HW 2 - Part 1
 
-## This homework has 3 parts, all of which should be completed inside this file.
+## This homework has 3 parts, all of which should be completed inside this file (and a little bit inside the /templates directory).
 
 ## Add view functions and any other necessary code to this Flask application code below so that the routes described in the README exist and render the templates they are supposed to (all templates provided are inside the templates/ directory, where they should stay).
 
@@ -11,14 +11,7 @@
 #############################
 ##### IMPORT STATEMENTS #####
 #############################
-
-from flask import Flask, request, render_template
-<<<<<<< HEAD
-import FlaskForm
-from wtforms import StringField, SubmitField, RadioField, ValidationError
-from wtforms.validators import Required
-
-=======
+from flask import Flask, request, render_template, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, ValidationError
 from wtforms.validators import Required
@@ -27,7 +20,6 @@ from wtforms.validators import Required
 ##### APP SETUP #####
 #####################
 
->>>>>>> a6eb0a1... Add structure and import stmts necessary
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'hardtoguessstring'
 
