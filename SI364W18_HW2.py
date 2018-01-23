@@ -16,6 +16,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, RadioField, ValidationError
 from wtforms.validators import Required
 
+import requests
+import json
+
 #####################
 ##### APP SETUP #####
 #####################
@@ -42,6 +45,33 @@ def hello_world():
 @app.route('/user/<name>')
 def hello_user(name):
     return '<h1>Hello {0}<h1>'.format(name)
+
+@app.route('/artistform')
+def artist_form():
+	return render_template('artistform.html')
+
+@app.route('/artistinfo', methods = ['GET', 'POST'])
+def artist_info():
+	artist_name = request.args.get("artist")
+
+	baseurl = "https://itunes.apple.com/search"
+	params = {"term":artist_name}
+
+	response = requests.get(baseurl, params=params)
+	objects = json.loads(response.text)["results"]
+
+	return render_template('artist_info.html',objects=objects)
+
+
+# @app.route('/artistlinks')
+
+# @app.route('/specific/song/<artist_name>')
+
+# @app.route('/album_entry')
+
+# @app.route('/album_result')
+
+
 
 
 if __name__ == '__main__':
