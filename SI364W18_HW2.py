@@ -63,9 +63,20 @@ def artist_info():
 	return render_template('artist_info.html',objects=objects)
 
 
-# @app.route('/artistlinks')
+@app.route('/artistlinks')
+def artist_links():
+	return render_template('artist_links.html')
 
-# @app.route('/specific/song/<artist_name>')
+@app.route('/specific/song/<artist_name>')
+def specific_song(artist_name):
+	baseurl = "https://itunes.apple.com/search"
+	params = {"term":artist_name}
+
+	response = requests.get(baseurl, params=params)
+	results = json.loads(response.text)["results"]
+
+	return render_template('specific_artist.html',results=results)
+
 
 # @app.route('/album_entry')
 
