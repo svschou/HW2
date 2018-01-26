@@ -1,0 +1,25 @@
+{% block content %}
+	<h1> Album Entry</h1>
+	<form method="POST" action="http://localhost:5000/album_result">
+		{{ form.hidden_tag() }}
+		{% for message in get_flashed_messages() %}
+		{{ message }}
+		{% endfor %}
+
+		<p>{{ form.album_name.label }} {{ form.album_name() }}</p>
+		<p>{{ form.rating.label }} {{ form.rating() }}</p>
+		{{ form.submit() }}
+	</form>	
+{% endblock %}
+
+
+<!--<h2>You searched for {{pokemon}}</h2>
+
+<h3>Stats: </h3>
+<h3> Height: {{height}}</h3>
+<h3> Weight: {{weight}}</h3>
+
+{% for ability in abilities %}
+	<li>{{ability}}</li>
+{% endfor %}	
+</form> -->
