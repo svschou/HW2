@@ -30,7 +30,10 @@ app.config['SECRET_KEY'] = 'hardtoguessstring'
 ###### FORMS #######
 ####################
 
-
+class AlbumEntryForm(FlaskForm):
+	album_name = StringField('Enter the name of an album: ', validators=[Required()])
+	rating = RadioField('How much do you like this album? (1 low, 3 high)', choices=[('1','1'),('2','2'),('3','3')], validators=[Required()])
+	submit = SubmitField('Submit')
 
 
 ####################
@@ -78,9 +81,21 @@ def specific_song(artist_name):
 	return render_template('specific_artist.html',results=results)
 
 
-# @app.route('/album_entry')
+@app.route('/album_entry')
+def album_entry():
+	form = AlbumEntryForm()
+	return render_template('album_entry.html',form=form)
 
-# @app.route('/album_result')
+@app.route('/album_result', methods = ['GET', 'POST'])
+def album_result():
+	form = AlbumEntryForm(request.form)
+	if request.method == "POST" and form.validate_on_submit():
+		album = form.album_name.data
+		rating = form.rating.data
+
+		
+
+		return render_template('album_data.html',album=album, rating=rating)
 
 
 
